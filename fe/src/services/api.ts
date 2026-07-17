@@ -9,6 +9,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 let isRefreshing = false;
 let pendingRequests: Array<(token: string) => void> = [];
 
+
 const refreshAccessToken = async (): Promise<string> => {
   const body = IS_DEV
     ? JSON.stringify({ refreshToken: localStorage.getItem("refreshToken") })

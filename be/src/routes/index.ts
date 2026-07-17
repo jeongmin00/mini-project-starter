@@ -1,12 +1,16 @@
 import { Router } from "express";
-import sampleRouter from "../sample/sample.router";
 import authRouter from "../auth/auth.router";
+import productRouter from "../products/product.router";
+import reviewRouter from "../reviews/review.router";
+import sampleRouter from "../sample/sample.router";
+import uploadRouter from "../upload/upload.router";
 
 const router = Router();
 
 router.use("/auth", authRouter);
 router.use("/samples", sampleRouter);
-// TODO: 새 라우터를 여기에 추가하세요
-// router.use("/products", productRouter);
+router.use("/products", productRouter);
+router.use("/products/:productId/reviews", reviewRouter);
+router.use("/upload", uploadRouter);
 
 export default router;

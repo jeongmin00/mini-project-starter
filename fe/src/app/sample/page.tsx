@@ -1,9 +1,9 @@
 // 이 파일은 참고용 샘플입니다. 실제 구현 시 이 패턴을 따라 작성하세요.
 "use client";
 
-import Link from "next/link";
-import { useSamples, useSample } from "@/hooks/queries/useSample";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSample, useSamples } from "@/hooks/queries/useSample";
+import Link from "next/link";
 
 export default function SamplePage() {
   // NOTE: 목록 조회

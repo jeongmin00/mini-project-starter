@@ -1,6 +1,12 @@
 "use client";
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface User {
   id: number;
@@ -32,8 +38,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const savedUser = localStorage.getItem("user");
     const accessToken = localStorage.getItem("accessToken");
     if (savedUser && accessToken) {
-      setUser(JSON.parse(savedUser));
-      setIsLoggedIn(true);
+      setUser(JSON.parse(savedUser)); // 문자열을 객체로 변환
+      setIsLoggedIn(true); // 새로고침해도 로그인 유지
     }
   }, []);
 

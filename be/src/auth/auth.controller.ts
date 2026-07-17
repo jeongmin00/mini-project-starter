@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { signupUser, loginUser, refreshAccessToken } from "./auth.service";
+import { loginUser, refreshAccessToken, signupUser } from "./auth.service";
 
-const IS_DEV = process.env.NODE_ENV !== "production";
+const IS_DEV = process.env.NODE_ENV !== "production"; // 개발 환경인지 확인
 
 const REFRESH_COOKIE_OPTIONS = {
   httpOnly: true,
@@ -13,7 +13,11 @@ const REFRESH_COOKIE_OPTIONS = {
 export const signup = async (req: Request, res: Response) => {
   try {
     const { email, password, name } = req.body;
-    const { accessToken, refreshToken } = await signupUser(email, password, name);
+    const { accessToken, refreshToken } = await signupUser(
+      email,
+      password,
+      name,
+    );
 
     if (!IS_DEV) {
       res.cookie("refreshToken", refreshToken, REFRESH_COOKIE_OPTIONS);
@@ -52,7 +56,8 @@ export const refresh = async (req: Request, res: Response) => {
   try {
     // 개발: body에서, 프로덕션: httpOnly 쿠키에서
     const token = IS_DEV ? req.body.refreshToken : req.cookies?.refreshToken;
-    if (!token) return res.status(401).json({ message: "refresh token이 없습니다." });
+    if (!token)
+      return res.status(401).json({ message: "refresh token이 없습니다." });
 
     const { accessToken } = refreshAccessToken(token);
     res.json({ accessToken });
