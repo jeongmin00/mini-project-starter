@@ -6,7 +6,10 @@ import router from "./routes/index";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({
+  origin: ["http://localhost:3000", "https://mini-project-starter.vercel.app"],
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(router);
