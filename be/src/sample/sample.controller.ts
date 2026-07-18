@@ -1,3 +1,4 @@
+// sample 컨트롤러
 import { Request, Response } from "express";
 import { findAllSamples, findSampleById } from "./sample.service";
 
